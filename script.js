@@ -511,3 +511,25 @@ window.addEventListener('load', () => {
     }, 100);
   }
 });
+function typeText(elementId, text, speed = 100, callback) {
+  const el = document.getElementById(elementId);
+  let i = 0;
+
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    } else if (callback) {
+      callback();
+    }
+  }
+
+  el.textContent = ''; // Clear first
+  type();
+}
+
+// Call it on DOM load or when screen initializes
+document.addEventListener('DOMContentLoaded', () => {
+  typeText('bootText', '>> Initializing Cano.exe', 75);
+});
