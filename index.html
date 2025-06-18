@@ -449,6 +449,7 @@
     <!-- Main Screen -->
     <div class="screen" id="mainScreen">
         <div class="boot" id="bootText"></div>
+        <div id="portfolioTitle" style="display: none; color: var(--primary-color); font-size: 1.8em; margin-bottom: 1.5rem; text-align: center; z-index: 20; position: relative;">Alex Cano Portfolio</div>
         <nav id="mainNav" style="display: none;">
             <a href="#" onclick="showSection('about')">About</a>
             <a href="#" onclick="showSection('projects')">Projects</a>
@@ -569,7 +570,7 @@
 
         // Boot sequence
         const bootMessages = [
-            'INITIALIZING SYSTEM...',
+            '>> Initializing Alex_Cano.exe',
             'LOADING NEURAL NETWORK...',
             'CONNECTING TO MATRIX...',
             'SYSTEM READY.'
@@ -596,6 +597,7 @@
                         } else {
                             setTimeout(() => {
                                 bootElement.style.display = 'none';
+                                document.getElementById('portfolioTitle').style.display = 'block';
                                 navElement.style.display = 'block';
                                 navElement.style.animation = 'fadeIn 1s ease-in';
                             }, 1000);
