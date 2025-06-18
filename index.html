@@ -1124,17 +1124,32 @@
     
 function setupClickHandlers() {
   const navLinks = document.querySelectorAll('nav a');
-  navLinks.forEach((link, index) => {
+  navLinks.forEach(link => {
+    // Click handler
     link.addEventListener('click', function(e) {
       e.preventDefault();
       const sectionId = this.getAttribute('data-section');
+      console.log("Clicked link:", sectionId);
       if (sectionId) {
         showSection(sectionId);
       }
     });
+
+    // Keyboard handler
+    link.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const sectionId = this.getAttribute('data-section');
+        console.log("Keyboard selected:", sectionId);
+        if (sectionId) {
+          showSection(sectionId);
+        }
+      }
+    });
+  });
 }
 
-}
+
       // Announce section changes to screen readers
       const announcer = document.createElement('div');
       announcer.setAttribute('aria-live', 'polite');
