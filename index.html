@@ -1114,7 +1114,11 @@
             showSection(sectionId);
           }
         });
-      });
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const sectionId = this.getAttribute('data-section');
+        showSection(sectionId);
+        });
 
       // Announce section changes to screen readers
       const announcer = document.createElement('div');
