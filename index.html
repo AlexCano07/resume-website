@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,37 +7,38 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="controls">
-    <button class="control-btn" id="themeToggle">Theme</button>
-    <button class="control-btn" id="soundToggle">Sound: ON</button>
+    <button class="control-btn" onclick="toggleTheme()" title="Toggle Theme">Theme</button>
+    <button class="control-btn" onclick="toggleSound()" title="Toggle Sound" id="soundBtn">Sound: ON</button>
   </div>
 
   <div class="screen" id="mainScreen">
     <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
     <div class="boot typing" id="bootText">>> Initializing Alex.exe</div>
-    <nav aria-label="Main navigation">
-      <a href="#about" data-section="about">About</a>
-      <a href="#skills" data-section="skills">Skills</a>
-      <a href="#projects" data-section="projects">Projects</a>
-      <a href="#contact" data-section="contact">Contact</a>
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="#about" data-section="about" role="button" tabindex="0">> About</a>
+      <a href="#skills" data-section="skills" role="button" tabindex="0">> Skills</a>
+      <a href="#projects" data-section="projects" role="button" tabindex="0">> Projects</a>
+      <a href="#contact" data-section="contact" role="button" tabindex="0">> Contact</a>
     </nav>
-    <div class="error" id="errorMsg" aria-live="polite"></div>
+    <div class="error" id="errorMsg" role="alert" aria-live="polite"></div>
   </div>
 
-  <div class="loading" id="loading">>> Loading...</div>
+  <div class="loading" id="loading">
+    <div class="boot">>> Loading...</div>
+  </div>
 
-  <section id="about">
-    <h1>About</h1>
+  <section id="about" role="main" aria-labelledby="about-heading">
+    <h1 id="about-heading" tabindex="-1">About</h1>
     <div class="about-wrapper">
       <img src="neo-pixel.png" alt="Pixel Character Avatar" class="pixel-avatar">
-      <p>I'm Alex, an IT professional, Business Analyst, and National Guard NCO who builds cool tech and teams.</p>
+      <p>I'm Alex, an IT professional, Business Analyst, and National Guard NCO who's all about building cool stuff. Whether it's tech, strategy, or a squad, I'm all in.</p>
     </div>
   </section>
 
-  <section id="skills">
-    <h1>Skills</h1>
+  <section id="skills" role="main" aria-labelledby="skills-heading">
+    <h1 id="skills-heading" tabindex="-1">Skills</h1>
     <ul>
       <li>HTML / CSS / JavaScript</li>
       <li>Python, R, SQL</li>
@@ -48,28 +48,23 @@
     </ul>
   </section>
 
-  <section id="projects">
-    <h1>Projects</h1>
-    <p>
-      Jarvis+: Local AI assistant<br>
-      CARE Dashboard: EO tracker<br>
-      GameBoy SP RGB Mod
-    </p>
+  <section id="projects" role="main" aria-labelledby="projects-heading">
+    <h1 id="projects-heading" tabindex="-1">Projects</h1>
+    <p>Jarvis+: A local AI assistant hosted on Linux<br>
+    CARE Dashboard: Platform operations & EO tracker for State Dept<br>
+    GameBoy SP RGB Mod: Full shell, IPS, and pixel-perfect nostalgia</p>
   </section>
 
-  <section id="contact">
-    <h1>Contact</h1>
-    <p>
-      Email: Alexandercanoo21@gmail.com<br>
-      GitHub: github.com/alexcano<br>
-      LinkedIn: linkedin.com/in/alexcano
-    </p>
+  <section id="contact" role="main" aria-labelledby="contact-heading">
+    <h1 id="contact-heading" tabindex="-1">Contact</h1>
+    <p>Email: alexandercanoo21@gmail.com<br>
+    GitHub: github.com/alexcano<br>
+    LinkedIn: linkedin.com/in/alexcano</p>
   </section>
 
-  <button class="back-btn" id="backBtn">&lt; Back</button>
+  <button class="back-btn" onclick="goHome()" id="backBtn" style="display: none;" title="Back to main menu">&lt; Back</button>
   <div class="keyboard-hint">Use ↑/↓ or W/S to navigate • ESC to go back</div>
 
   <script src="script.js"></script>
 </body>
-
 </html>
