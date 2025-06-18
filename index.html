@@ -12,20 +12,10 @@
     <button class="control-btn" onclick="toggleTheme()" title="Toggle Theme">Theme</button>
     <button class="control-btn" onclick="toggleSound()" title="Toggle Sound" id="soundBtn">Sound: ON</button>
   </div>
-  
-  <!-- Main screen with matrix background -->
-  <div class="screen main-interface" id="mainScreen">
+
+  <div class="screen" id="mainScreen">
     <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
-    
-    <!-- Enhanced boot sequence - choose ONE of these options -->
-    <!-- Option 1: Single line boot (your current setup) -->
-    <div class="boot typing" id="bootText"></div>
-    
-    <!-- Option 2: Multi-line boot sequence (uncomment to use instead) -->
-    <!--
-    <div class="boot-container" id="bootContainer"></div>
-    -->
-    
+    <div class="boot" id="bootText"></div>
     <nav role="navigation" aria-label="Main navigation">
       <a href="#about" data-section="about" role="button" tabindex="0">> About</a>
       <a href="#skills" data-section="skills" role="button" tabindex="0">> Skills</a>
@@ -34,63 +24,53 @@
     </nav>
     <div class="error" id="errorMsg" role="alert" aria-live="polite"></div>
   </div>
-  
+
   <div class="loading" id="loading">
     <div class="boot">>> Loading...</div>
   </div>
-  
-  <!-- About Section with typing animations -->
+
   <section id="about" role="main" aria-labelledby="about-heading">
-    <h1 id="about-title" tabindex="-1">About</h1>
+    <h1 id="about-heading" tabindex="-1">About</h1>
     <div class="about-wrapper">
-      <img src="neo-pixel.png" alt="Pixel Character Avatar" class="pixel-avatar">
-      <p class="type-animate">I'm Alex, an IT professional, Business Analyst, and National Guard NCO who's all about building cool stuff.</p>
-      <p class="type-animate">Whether it's tech, strategy, or a squad, I'm all in.</p>
+      <img src="neo-pixel.png" alt="Pixel art avatar of Alex" class="pixel-avatar" width="120" height="120">
+      <div class="about-text">
+        <p>I'm Alex, an IT professional, Business Analyst, and National Guard NCO who's all about building cool stuff. Whether it's tech, strategy, or a squad, I'm all in.</p>
+      </div>
     </div>
   </section>
-  
-  <!-- Skills Section with typing animations -->
+
   <section id="skills" role="main" aria-labelledby="skills-heading">
-    <h1 id="skills-title" tabindex="-1">Skills</h1>
+    <h1 id="skills-heading" tabindex="-1">Skills</h1>
     <ul>
-      <li class="type-animate">HTML / CSS / JavaScript</li>
-      <li class="type-animate">Python, R, SQL</li>
-      <li class="type-animate">Hardware & Console Repair</li>
-      <li class="type-animate">Data Analytics & Visualization</li>
-      <li class="type-animate">AI Prompt Engineering</li>
+      <li>HTML / CSS / JavaScript</li>
+      <li>Python, R, SQL</li>
+      <li>Hardware & Console Repair</li>
+      <li>Data Analytics & Visualization</li>
+      <li>AI Prompt Engineering</li>
     </ul>
   </section>
-  
-  <!-- Projects Section with typing animations -->
+
   <section id="projects" role="main" aria-labelledby="projects-heading">
-    <h1 id="projects-title" tabindex="-1">Projects</h1>
-    <div class="project-item type-animate">
-      <strong>Jarvis+:</strong> A local AI assistant hosted on Linux
-    </div>
-    <div class="project-item type-animate">
-      <strong>CARE Dashboard:</strong> Platform operations & EO tracker for State Dept
-    </div>
-    <div class="project-item type-animate">
-      <strong>GameBoy SP RGB Mod:</strong> Full shell, IPS, and pixel-perfect nostalgia
-    </div>
+    <h1 id="projects-heading" tabindex="-1">Projects</h1>
+    <ul>
+      <li><strong>Jarvis+:</strong> A local AI assistant hosted on Linux</li>
+      <li><strong>CARE Dashboard:</strong> Platform operations & EO tracker for State Dept</li>
+      <li><strong>GameBoy SP RGB Mod:</strong> Full shell, IPS, and pixel-perfect nostalgia</li>
+    </ul>
   </section>
-  
-  <!-- Contact Section with typing animations -->
+
   <section id="contact" role="main" aria-labelledby="contact-heading">
-    <h1 id="contact-title" tabindex="-1">Contact</h1>
-    <div class="contact-item type-animate">
-      <strong>Email:</strong> alexandercanoo21@gmail.com
-    </div>
-    <div class="contact-item type-animate">
-      <strong>GitHub:</strong> github.com/alexcano
-    </div>
-    <div class="contact-item type-animate">
-      <strong>LinkedIn:</strong> linkedin.com/in/alexcano
-    </div>
+    <h1 id="contact-heading" tabindex="-1">Contact</h1>
+    <ul>
+      <li>Email: <a href="mailto:alexandercanoo21@gmail.com">alexandercanoo21@gmail.com</a></li>
+      <li>GitHub: <a href="https://github.com/alexcano" target="_blank" rel="noopener noreferrer">github.com/alexcano</a></li>
+      <li>LinkedIn: <a href="https://linkedin.com/in/alexcano" target="_blank" rel="noopener noreferrer">linkedin.com/in/alexcano</a></li>
+    </ul>
   </section>
-  
+
   <button class="back-btn" onclick="goHome()" id="backBtn" style="display: none;" title="Back to main menu">&lt; Back</button>
   <div class="keyboard-hint">Use ↑/↓ or W/S to navigate • ESC to go back</div>
+
   <script src="script.js"></script>
 </body>
 </html>
