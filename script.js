@@ -125,11 +125,19 @@ function initializeMatrix() {
 
 function resizeMatrixCanvas() {
   if (!matrixCanvas || !matrixCtx) return;
-  const rect = matrixCanvas.getBoundingClientRect();
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
   const ratio = window.devicePixelRatio || 1;
-  matrixCanvas.width = rect.width * ratio;
-  matrixCanvas.height = rect.height * ratio;
+
+  matrixCanvas.width = width * ratio;
+  matrixCanvas.height = height * ratio;
+  matrixCanvas.style.width = width + 'px';
+  matrixCanvas.style.height = height + 'px';
+
+  matrixCtx.setTransform(1, 0, 0, 1, 0, 0); // reset any scale first
   matrixCtx.scale(ratio, ratio);
+
   setupMatrixColumns();
 }
 
