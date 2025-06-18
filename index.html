@@ -57,7 +57,7 @@
           width: 100%;
           height: 100%;
           z-index: 1;
-          opacity: 0.5 !important;
+          opacity: 1 !important;
           pointer-events: none;
           background: #0f0f0f;
         }
@@ -468,7 +468,7 @@
     <section id="about">
         <h1>About Me</h1>
         <div class="about-wrapper">
-            <img src="neo-pixel.png" alt="Alex Cano Avatar" class="pixel-avatar">
+            <img src="neo-pixel.png" alt="Alex Cano Avatar" class="pixel-avatar" onerror="this.style.border='2px solid red'; this.alt='Image not found: neo-pixel.png';" onload="console.log('Avatar loaded successfully')">
             <div>
                 <p>Welcome to my digital realm. I'm a developer who believes in the power of clean code and innovative solutions.</p>
                 <p>My journey began with curiosity about how things work and evolved into a passion for creating digital experiences that matter.</p>
