@@ -1104,12 +1104,25 @@
     }
 
     function setupAccessibility() {
-      // Add ARIA labels and roles
-      document.querySelectorAll('nav a').forEach((link, index) => {
-        link.setAttribute('aria-label', `Navigate to ${sections[index]} section`);
-        
-        // Handle both click and keyboard activation
-       function setupClickHandlers() {
+  document.querySelectorAll('nav a').forEach((link, index) => {
+    link.setAttribute('aria-label', `Navigate to ${sections[index]} section`);
+  });
+
+  // Announce section changes to screen readers
+  const announcer = document.createElement('div');
+  announcer.setAttribute('aria-live', 'polite');
+  announcer.setAttribute('aria-atomic', 'true');
+  announcer.style.position = 'absolute';
+  announcer.style.left = '-10000px';
+  announcer.style.width = '1px';
+  announcer.style.height = '1px';
+  announcer.style.overflow = 'hidden';
+  document.body.appendChild(announcer);
+
+  window.screenReaderAnnouncer = announcer;
+}
+    
+function setupClickHandlers() {
   const navLinks = document.querySelectorAll('nav a');
   navLinks.forEach((link, index) => {
     link.addEventListener('click', function(e) {
@@ -1119,6 +1132,18 @@
         showSection(sectionId);
       }
     });
+
+    link.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const sectionId = this.getAttribute('data-section');
+        if (sectionId) {
+          showSection(sectionId);
+        }
+      }
+    });
+  });
+}
 
     link.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
