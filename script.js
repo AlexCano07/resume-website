@@ -101,9 +101,11 @@ function initializeMatrix() {
   try {
     matrixCanvas = document.getElementById('matrixCanvas');
     matrixCtx = matrixCanvas.getContext('2d');
+    
     resizeMatrixCanvas();
     setupMatrixColumns();
     startMatrixAnimation();
+    
     window.addEventListener('resize', debounce(resizeMatrixCanvas, 250));
     matrixInitialized = true;
   } catch (error) {
