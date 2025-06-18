@@ -439,10 +439,10 @@
     <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
     <div class="boot typing" id="bootText">>> Initializing Alex.exe</div>
     <nav role="navigation" aria-label="Main navigation">
-      <a href="#about" onclick="showSection('about')" data-section="about" role="button" tabindex="0">> About</a>
-      <a href="#skills" onclick="showSection('skills')" data-section="skills" role="button" tabindex="0">> Skills</a>
-      <a href="#projects" onclick="showSection('projects')" data-section="projects" role="button" tabindex="0">> Projects</a>
-      <a href="#contact" onclick="showSection('contact')" data-section="contact" role="button" tabindex="0">> Contact</a>
+      <a href="#about" data-section="about" role="button" tabindex="0">> About</a>
+      <a href="#skills" data-section="skills" role="button" tabindex="0">> Skills</a>
+      <a href="#projects" data-section="projects" role="button" tabindex="0">> Projects</a>
+      <a href="#contact" data-section="contact" role="button" tabindex="0">> Contact</a>
     </nav>
     <div class="error" id="errorMsg" role="alert" aria-live="polite"></div>
   </div>
@@ -511,7 +511,9 @@
       setupKeyboardNavigation();
       setupAccessibility();
       initializeMatrix();
+      setupClickHandlers();
     });
+    
 
     function initializeApp() {
       try {
@@ -1107,19 +1109,28 @@
         link.setAttribute('aria-label', `Navigate to ${sections[index]} section`);
         
         // Handle both click and keyboard activation
-        link.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            const sectionId = this.getAttribute('data-section');
-            showSection(sectionId);
-          }
-        });
-      link.addEventListener('click', function(e) {
+       function setupClickHandlers() {
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach((link, index) => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const sectionId = this.getAttribute('data-section');
+      if (sectionId) {
+        showSection(sectionId);
+      }
+    });
+
+    link.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         const sectionId = this.getAttribute('data-section');
-        showSection(sectionId);
-        });
-
+        if (sectionId) {
+          showSection(sectionId);
+        }
+      }
+    });
+  });
+}
       // Announce section changes to screen readers
       const announcer = document.createElement('div');
       announcer.setAttribute('aria-live', 'polite');
