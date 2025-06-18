@@ -317,8 +317,14 @@
       }
     }
 
-    /* Focus indicators for keyboard navigation */
+    /* Focus indicators for keyboard navigation and accessibility */
     .screen:focus-within nav a:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+
+    /* Make section headings focusable for accessibility */
+    section h1[tabindex="-1"]:focus {
       outline: 2px solid var(--primary-color);
       outline-offset: 2px;
     }
@@ -446,7 +452,7 @@
   </div>
 
   <section id="about" role="main" aria-labelledby="about-heading">
-    <h1 id="about-heading">About</h1>
+    <h1 id="about-heading" tabindex="-1">About</h1>
     <div class="about-wrapper">
       <img src="neo-pixel.png" alt="Pixel Character Avatar" class="pixel-avatar">
       <p>I'm Alex, an IT professional, Business Analyst, and National Guard NCO who's all about building cool stuff. Whether it's tech, strategy, or a squad, I'm all in.</p>
@@ -454,7 +460,7 @@
   </section>
 
   <section id="skills" role="main" aria-labelledby="skills-heading">
-    <h1 id="skills-heading">Skills</h1>
+    <h1 id="skills-heading" tabindex="-1">Skills</h1>
     <ul>
       <li>HTML / CSS / JavaScript</li>
       <li>Python, R, SQL</li>
@@ -465,14 +471,14 @@
   </section>
 
   <section id="projects" role="main" aria-labelledby="projects-heading">
-    <h1 id="projects-heading">Projects</h1>
+    <h1 id="projects-heading" tabindex="-1">Projects</h1>
     <p>Jarvis+: A local AI assistant hosted on Linux<br>
     CARE Dashboard: Platform operations & EO tracker for State Dept<br>
     GameBoy SP RGB Mod: Full shell, IPS, and pixel-perfect nostalgia</p>
   </section>
 
   <section id="contact" role="main" aria-labelledby="contact-heading">
-    <h1 id="contact-heading">Contact</h1>
+    <h1 id="contact-heading" tabindex="-1">Contact</h1>
     <p>Email: alexcano.dev@example.com<br>
     GitHub: github.com/alexcano<br>
     LinkedIn: linkedin.com/in/alexcano</p>
@@ -509,9 +515,6 @@
 
     function initializeApp() {
       try {
-        // Load user preferences
-        loadPreferences();
-        
         // Initialize audio context on first user interaction
         document.addEventListener('click', initAudioContext, { once: true });
         document.addEventListener('keydown', initAudioContext, { once: true });
@@ -1072,7 +1075,6 @@
         }
         
         playSound(900, 100);
-        savePreferences();
       } catch (error) {
         handleError('Failed to toggle theme', error);
       }
@@ -1089,8 +1091,6 @@
         if (soundEnabled) {
           playSound(800, 100);
         }
-        
-        savePreferences();
       } catch (error) {
         handleError('Failed to toggle sound', error);
       }
@@ -1185,38 +1185,6 @@
       playSound(300, 200, 'square');
     }
 
-    function savePreferences() {
-      try {
-        const preferences = {
-          theme: currentTheme,
-          soundEnabled: soundEnabled
-        };
-        // Note: localStorage not available in Claude artifacts, would use localStorage.setItem in real environment
-        // localStorage.setItem('terminalResumePrefs', JSON.stringify(preferences));
-      } catch (error) {
-        console.warn('Failed to save preferences:', error);
-      }
-    }
-
-    function loadPreferences() {
-      try {
-        // Note: localStorage not available in Claude artifacts, would use localStorage.getItem in real environment
-        // const saved = localStorage.getItem('terminalResumePrefs');
-        // if (saved) {
-        //   const preferences = JSON.parse(saved);
-        //   currentTheme = preferences.theme || 'dark';
-        //   soundEnabled = preferences.soundEnabled !== false;
-        //   document.documentElement.setAttribute('data-theme', currentTheme);
-        //   const soundBtn = document.getElementById('soundBtn');
-        //   if (soundBtn) {
-        //     soundBtn.textContent = `Sound: ${soundEnabled ? 'ON' : 'OFF'}`;
-        //   }
-        // }
-      } catch (error) {
-        console.warn('Failed to load preferences:', error);
-      }
-    }
-
     // Handle browser back/forward buttons
     window.addEventListener('popstate', function(e) {
       const sectionId = e.state?.section;
@@ -1231,7 +1199,7 @@
     window.addEventListener('load', function() {
       const hash = window.location.hash.substring(1);
       if (hash && sections.includes(hash)) {
-        setTimeout(() => showSection(hash), 1000); // Delay for boot animation
+        setTimeout(() => showSection(hash), 500); // Reduced delay for better UX
       }
     });
 
@@ -1243,9 +1211,11 @@
       // Clean up matrix animation
       stopMatrixAnimation();
       
-      // Clean up audio context
-      if (audioContext) {
-        audioContext.close();
+      // Clean up audio context safely
+      if (audioContext && audioContext.state !== 'closed') {
+        audioContext.close().catch(() => {
+          // Silently handle any close errors - not critical during page unload
+        });
       }
     });
 
