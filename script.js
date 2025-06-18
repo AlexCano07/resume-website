@@ -186,8 +186,10 @@ function goHome() {
     currentSection = null;
     navigationIndex = 0;
     
-    // Restart matrix animation
-    startMatrixAnimation();
+    // Restart matrix animation if it's not running
+    if (matrixInitialized && !matrixAnimationId) {
+      startMatrixAnimation();
+    }
     
     hideLoading();
     updateURL('');
@@ -225,18 +227,33 @@ function updateURL(sectionId) {
 function initializeMatrix() {
   try {
     matrixCanvas = document.getElementById('matrixCanvas');
-    if (!matrixCanvas) return;
+    if (!matrixCanvas) {
+      console.warn('Matrix canvas not found');
+      return;
+    }
     
     matrixCtx = matrixCanvas.getContext('2d');
-    if (!matrixCtx) return;
+    if (!matrixCtx) {
+      console.warn('Matrix context not available');
+      return;
+    }
 
     resizeMatrixCanvas();
     setupMatrixColumns();
-    startMatrixAnimation();
-
-    // Handle window resize
-    window.addEventListener('resize', debounce(resizeMatrixCanvas, 250));
     matrixInitialized = true;
+    
+    // Start animation immediately
+    startMatrixAnimation();
+    
+    // Handle window resize
+    window.addEventListener('resize', debounce(() => {
+      resizeMatrixCanvas();
+      if (!matrixAnimationId) {
+        startMatrixAnimation();
+      }
+    }, 250));
+    
+    console.log('Matrix rain initialized and started');
   } catch (error) {
     console.error('Matrix initialization error:', error);
   }
@@ -485,5 +502,12 @@ window.addEventListener('load', () => {
   const hash = window.location.hash.substring(1);
   if (hash && sections.includes(hash)) {
     setTimeout(() => showSection(hash), 100);
+  } else {
+    // Ensure matrix animation starts on home page
+    setTimeout(() => {
+      if (matrixInitialized && !matrixAnimationId && !currentSection) {
+        startMatrixAnimation();
+      }
+    }, 100);
   }
 });
