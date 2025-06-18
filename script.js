@@ -16,7 +16,7 @@ let matrixInitialized = false;
 let audioContext = null;
 
 // Initialize application
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   initializeApp();
   setupKeyboardNavigation();
   setupAccessibility();
@@ -35,9 +35,7 @@ function initializeApp() {
         bootText.classList.add('typing');
       }
     }, 500);
-
-    preloadSections();
-  } catch (error) {Add commentMore actions
+  } catch (error) {
     console.error('Initialization error:', error);
   }
 }
@@ -70,6 +68,17 @@ function playSound(frequency = 800, duration = 100, type = 'sine') {
   }
 }
 
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  const btn = document.getElementById('soundBtn');
+  btn.textContent = `Sound: ${soundEnabled ? 'ON' : 'OFF'}`;
+}
+
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+}
+
 function showSection(sectionId) {
   try {
     if (!sections.includes(sectionId) || currentSection === sectionId) return;
@@ -77,6 +86,7 @@ function showSection(sectionId) {
     playSound(600, 150);
     document.getElementById('mainScreen').style.opacity = '0';
     stopMatrixAnimation();
+
     setTimeout(() => {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
       const targetSection = document.getElementById(sectionId);
@@ -101,11 +111,11 @@ function initializeMatrix() {
   try {
     matrixCanvas = document.getElementById('matrixCanvas');
     matrixCtx = matrixCanvas.getContext('2d');
-    
+
     resizeMatrixCanvas();
     setupMatrixColumns();
     startMatrixAnimation();
-    
+
     window.addEventListener('resize', debounce(resizeMatrixCanvas, 250));
     matrixInitialized = true;
   } catch (error) {
@@ -246,3 +256,4 @@ function setupAccessibility() {
     section.setAttribute('aria-hidden', 'true');
   });
 }
+
