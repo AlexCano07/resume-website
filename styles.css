@@ -60,7 +60,7 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-      opacity: 0.8;
+      opacity: 1;
       pointer-events: none;
       transition: opacity var(--transition-speed);
     }
