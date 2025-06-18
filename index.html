@@ -1132,29 +1132,8 @@ function setupClickHandlers() {
         showSection(sectionId);
       }
     });
-
-    link.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const sectionId = this.getAttribute('data-section');
-        if (sectionId) {
-          showSection(sectionId);
-        }
-      }
-    });
-  });
 }
 
-    link.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const sectionId = this.getAttribute('data-section');
-        if (sectionId) {
-          showSection(sectionId);
-        }
-      }
-    });
-  });
 }
       // Announce section changes to screen readers
       const announcer = document.createElement('div');
