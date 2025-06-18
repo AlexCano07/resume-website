@@ -36,6 +36,10 @@ function initializeApp() {
       }
     }, 500);
 
+    preloadSections();
+  } catch (error) {Add commentMore actions
+    console.error('Initialization error:', error);
+  }
 }
 
 function initAudioContext() {
