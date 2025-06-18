@@ -13,7 +13,7 @@
       --border-color: #00ff99;
       --hover-bg: #00ff99;
       --hover-text: #0f0f0f;
-      --transition-speed: 0.5s;
+      --transition-speed: 0.3s;
     }
 
     [data-theme="light"] {
@@ -984,6 +984,11 @@
 
           hideLoading();
           updateURL('');
+
+          // Resume matrix animation immediately when back on main screen
+          if (matrixInitialized) {
+            startMatrixAnimation();
+          }
 
         }, 200);
 
