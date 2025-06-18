@@ -1,12 +1,12 @@
-root {
-      --primary-color: #00ff99;
-      --bg-color: #0f0f0f;
-      --text-color: #00ff99;
-      --border-color: #00ff99;
-      --hover-bg: #00ff99;
-      --hover-text: #0f0f0f;
-      --transition-speed: 0.3s;
-    }
+:root {
+  --primary-color: #00ff99;
+  --bg-color: #0f0f0f;
+  --text-color: #00ff99;
+  --border-color: #00ff99;
+  --hover-bg: #00ff99;
+  --hover-text: #0f0f0f;
+  --transition-speed: 0.3s;
+}
 
     [data-theme="light"] {
       --primary-color: #0066cc;
