@@ -1,1 +1,35 @@
+body {
+  background-color: #0f0f0f;
+  color: #00ff99;
+  font-family: 'Press Start 2P', monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+button {
+  background: none;
+  border: 1px solid #00ff99;
+  color: #00ff99;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+button:hover {
+  background: #00ff99;
+  color: #0f0f0f;
+}
+
+section {
+  display: none;
+  margin-top: 20px;
+}
+
+section.active {
+  display: block;
+}
 
