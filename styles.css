@@ -67,7 +67,7 @@
 
     /* Reduce matrix opacity when transitioning sections */
     .screen.transitioning .matrix-canvas {
-      opacity: 0.1;
+      opacity: 0.5;
     }
 
     @media (min-width: 768px) {
